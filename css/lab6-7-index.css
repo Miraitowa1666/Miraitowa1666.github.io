@@ -1,0 +1,939 @@
+/* 
+ * 图书商城网站样式文件
+ * 统一管理颜色、字体、布局等样式，确保响应式与美观性
+ */
+
+/* ========================== 全局变量定义 ========================== */
+:root {
+    /* 颜色系统 */
+    --primary-color: #2c3e50;    /* 主色调：深蓝色（用于标题、重要文本） */
+    --secondary-color: #3498db;  /* 辅助色：亮蓝色（用于链接、按钮） */
+    --accent-color: #e74c3c;     /* 强调色：红色（用于购物车、结账按钮） */
+    --text-color: #2c3e50;       /* 文本颜色：深灰色 */
+    --light-text: #7f8c8d;       /* 浅文本颜色：灰色（用于次要信息） */
+    --light-gray: #ecf0f1;       /* 浅灰色背景 */
+    --border-color: #bdc3c7;     /* 边框颜色 */
+    --white: #fff;               /* 白色背景 */
+    
+    /* 布局与效果 */
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);  /* 基础阴影 */
+    --transition: all 0.3s ease;          /* 统一过渡效果 */
+}
+
+/* ========================== 通用重置与基础样式 ========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /* 盒模型：border 和 padding 不撑大元素 */
+    font-family: "微软雅黑", sans-serif;  /* 统一字体 */
+    font-size: 14px;         /* 基础字号 */
+}
+
+body {
+    background-color: #f9f9f9;
+    /* 背景纹理：双重径向渐变 */
+    background-image: 
+        radial-gradient(var(--primary-color) 0.5px, transparent 0.5px),
+        radial-gradient(var(--primary-color) 0.5px, #f9f9f9 0.5px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    color: var(--text-color);
+    padding-bottom: 50px;  /* 底部留白，避免内容被遮挡 */
+}
+
+/* ========================== 顶部导航栏 ========================== */
+.header {
+    width: 100%;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    position: sticky;  /* 粘性导航：滚动时固定在顶部 */
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.95);  /* 半透明白色 */
+    backdrop-filter: blur(5px);  /* 背景模糊效果 */
+}
+
+/* Logo 样式 */
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: inline-block;
+    margin-right: 40px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+.logo i {
+    margin-right: 8px;
+    font-size: 24px;
+    color: var(--secondary-color);
+}
+
+/* 主导航链接 */
+.nav {
+    display: inline-block;
+    vertical-align: middle;
+}
+.nav a {
+    text-decoration: none;
+    color: var(--light-text);
+    margin: 0 15px;
+    font-size: 15px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 0;
+    position: relative;  /* 用于伪元素定位 */
+}
+.nav a i {
+    margin-right: 6px;
+    font-size: 16px;
+    transition: transform 0.5s ease;  /* 图标旋转过渡 */
+}
+/* 导航链接 hover 效果 */
+.nav a:hover {
+    color: var(--secondary-color);
+}
+.nav a:hover i {
+    transform: rotate(360deg);  /* 图标旋转动画 */
+}
+/* 导航链接下划线动画 */
+.nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: var(--transition);
+}
+.nav a:hover::after {
+    width: 100%;  /* 下划线展开 */
+}
+
+/* 购物车图标 */
+.cart-icon {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.cart-icon i {
+    font-size: 20px;
+    color: var(--secondary-color);
+    transition: var(--transition);
+}
+.cart-icon:hover i {
+    color: var(--accent-color);
+    transform: scale(1.1) rotate(360deg);  /* 放大+旋转 */
+}
+/* 购物车数量标记 */
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;  /* 圆形 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================== 主体内容容器 ========================== */
+.container {
+    width: 1000px;
+    margin: 0 auto;  /* 水平居中 */
+    display: flex;   /* 弹性布局：左中右三列 */
+    gap: 20px;       /* 列间距 */
+}
+
+/* 左侧边栏（分类） */
+.left-col {
+    width: 120px;
+}
+.left-col h3 {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--secondary-color);  /* 底部强调线 */
+    display: flex;
+    align-items: center;
+}
+.left-col h3 i {
+    margin-right: 6px;
+    color: var(--secondary-color);
+}
+/* 分类列表 */
+.category-list {
+    list-style: none;  /* 去掉默认列表样式 */
+}
+.category-list li {
+    margin: 10px 0;
+    transition: transform 0.2s ease;  /* 平移过渡 */
+}
+.category-list li a {
+    text-decoration: none;
+    color: var(--light-text);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+}
+.category-list li a i {
+    margin-right: 6px;
+    font-size: 13px;
+    width: 16px;
+    color: var(--secondary-color);
+}
+/* 分类列表 hover 效果 */
+.category-list li:hover {
+    transform: translateX(5px);  /* 向右平移 */
+}
+.category-list a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;  /* 下划线 */
+}
+
+/* 中间内容区（轮播图+图书列表） */
+.middle-col {
+    flex: 1;  /* 占满剩余空间 */
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+/* 轮播图容器 */
+.carousel-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;  /* 隐藏溢出内容 */
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+.carousel-slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;  /* 默认隐藏 */
+    animation: carousel 12s infinite;  /* 轮播动画 */
+}
+/* 轮播图延迟显示 */
+.carousel-slide:nth-child(1) { animation-delay: 0s; }
+.carousel-slide:nth-child(2) { animation-delay: 4s; }
+.carousel-slide:nth-child(3) { animation-delay: 8s; }
+/* 轮播动画关键帧 */
+@keyframes carousel {
+    0% { opacity: 0; }
+    10% { opacity: 1; }  /* 显示 */
+    30% { opacity: 1; }  /* 保持显示 */
+    40% { opacity: 0; }  /* 隐藏 */
+    100% { opacity: 0; }
+}
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 图片自适应容器（裁剪多余部分） */
+}
+
+/* 右侧边栏（促销信息） */
+.right-col {
+    width: 180px;
+}
+.promo-item {
+    margin-bottom: 20px;
+    overflow: hidden;  /* 清除浮动 */
+    padding: 10px;
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+/* 促销信息前缀图标（Font Awesome） */
+.promo-item::before {
+    content: "\f02b";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--accent-color);
+    margin-right: 5px;
+}
+/* 促销信息 hover 效果 */
+.promo-item:hover {
+    transform: translateY(-3px);  /* 向上浮动 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.promo-item img {
+    width: 45%;
+    height: 120px;
+    float: left;
+    margin-right: 8px;
+    transition: var(--transition);
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 3px;
+}
+.promo-item img:hover {
+    transform: translateY(-4px) scale(1.08);  /* 放大+上浮 */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.12);
+}
+.promo-item p {
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+/* ========================== 热门推荐区域 ========================== */
+.hot-recommend h3, .new-books h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+.hot-recommend h3 i, .new-books h3 i {
+    margin-right: 8px;
+    color: var(--secondary-color);
+}
+.hot-recommend h3 {
+    color: var(--text-color);
+}
+/* 标题右侧强调线 */
+.hot-recommend h3::after, .new-books h3::after {
+    content: '';
+    flex-grow: 1;
+    height: 2px;
+    margin-left: 10px;
+}
+.hot-recommend h3::after {
+    background-color: var(--secondary-color);
+    width: 40px;
+}
+
+/* ========================== 新书上架区域 ========================== */
+.new-books h3 {
+    color: var(--primary-color);
+    margin-top: 30px;  /* 与热门推荐间距 */
+}
+.new-books h3::after {
+    background-color: var(--secondary-color);
+    width: 40px;
+}
+
+/* 图书网格布局（4列） */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);  /* 4列等宽 */
+    gap: 20px;  /* 网格间距 */
+}
+
+/* 单本图书项 */
+.book-item {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--light-gray);
+    border-radius: 5px;
+    transition: var(--transition);
+    position: relative;  /* 用于弹窗定位 */
+    height: 300px;  /* 固定高度，确保布局一致 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* 图书项 hover 效果 */
+.book-item:hover {
+    transform: translateY(-5px);  /* 上浮 */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.book-item img {
+    width: 100px;
+    height: 140px;
+    margin-bottom: 10px;
+    transition: var(--transition);
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+.book-item:hover img {
+    transform: translateX(10px) scale(1.1);  /* 右移+放大 */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.book-item p {
+    color: var(--text-color);
+    margin: 5px 0;
+    font-size: 15px;
+    height: 40px;  /* 固定高度，避免标题换行导致布局错乱 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.book-item span {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 16px;  /* 价格字号稍大 */
+}
+
+/* 加入购物车按钮 */
+.add-to-cart {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin-top: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+}
+.add-to-cart i {
+    margin-right: 5px;
+    font-size: 12px;
+}
+.add-to-cart:hover {
+    background-color: var(--accent-color);  /* 变色 */
+    transform: scale(1.05);  /* 放大 */
+}
+
+/* 新书表格样式 */
+.new-books table {
+    width: 100%;
+    border-collapse: collapse;  /* 合并边框 */
+    background-color: var(--white);
+}
+.new-books th, .new-books td {
+    border: 1px solid var(--border-color);
+    padding: 12px 10px;
+    text-align: left;
+}
+.new-books th {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+.new-books th i {
+    margin-right: 6px;
+    color: var(--secondary-color);
+}
+/* 表格奇偶行交替背景 */
+.new-books tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+/* 表格行 hover 效果 */
+.new-books tr:hover {
+    background-color: #f0f7ff;  /* 浅蓝色背景 */
+}
+.new-books img {
+    width: 60px;
+    height: 80px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    transition: var(--transition);
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.new-books img:hover {
+    transform: translateY(-3px) scale(1.05);  /* 上浮+放大 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ========================== 购物车侧边栏模态框 ========================== */
+.cart-modal {
+    position: fixed;
+    top: 0;
+    right: -400px;  /* 默认隐藏在右侧 */
+    width: 380px;
+    height: 100%;
+    background-color: var(--white);
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    transition: right 0.3s ease;  /* 滑入滑出过渡 */
+    z-index: 1000;  /* 最高层级，避免被遮挡 */
+    padding: 20px;
+    overflow-y: auto;  /* 内容超出时滚动 */
+}
+/* 购物车激活状态（显示） */
+.cart-modal.active {
+    right: 0;  /* 滑入屏幕 */
+}
+/* 购物车头部 */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.cart-header h3 {
+    font-size: 18px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+}
+.cart-header h3 i {
+    margin-right: 8px;
+    color: var(--secondary-color);
+}
+/* 关闭购物车按钮 */
+.close-cart {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--light-text);
+    transition: var(--transition);
+}
+.close-cart:hover {
+    color: var(--accent-color);
+}
+
+/* 购物车项目列表 */
+.cart-items {
+    margin-bottom: 20px;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);  /* 项目分隔线 */
+}
+.cart-item img {
+    width: 60px;
+    height: 80px;
+    margin-right: 15px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.cart-item-details {
+    flex-grow: 1;  /* 占满剩余空间 */
+}
+.cart-item-name {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.cart-item-price {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* 数量调整控件 */
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--border-color);
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.quantity-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+.quantity-input {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-left: none;
+    border-right: none;  /* 去掉左右边框，与按钮合并 */
+}
+
+/* 删除购物车项目按钮 */
+.remove-item {
+    color: var(--light-text);
+    cursor: pointer;
+    margin-left: 10px;
+    transition: var(--transition);
+}
+.remove-item:hover {
+    color: var(--accent-color);
+}
+
+/* 购物车结算区（固定在底部） */
+.cart-summary {
+    position: sticky;
+    bottom: 0;
+    background-color: var(--white);
+    padding: 15px 0;
+    border-top: 2px solid var(--border-color);  /* 顶部粗分隔线 */
+}
+/* 购物车总计 */
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+.cart-total .total-label {
+    display: flex;
+    align-items: center;
+}
+.cart-total .total-label i {
+    margin-right: 6px;
+    color: var(--accent-color);
+}
+.total-label {
+    font-weight: bold;
+}
+.total-amount {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 18px;  /* 总金额字号稍大 */
+}
+
+/* 结账按钮 */
+.checkout-btn {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.checkout-btn i {
+    margin-right: 8px;
+}
+.checkout-btn:hover {
+    background-color: #c0392b;  /* 加深红色 */
+    transform: translateY(-2px);  /* 上浮 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 空购物车状态 */
+.empty-cart {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--light-text);
+}
+.empty-cart i {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: var(--border-color);
+}
+
+/* 遮罩层（购物车显示时的背景变暗） */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);  /* 半透明黑色 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 999;  /* 层级低于购物车 */
+}
+.overlay.active {
+    opacity: 1;
+    visibility: visible;  /* 显示遮罩 */
+}
+
+/* ========================== 独立表单页面样式 ========================== */
+.form-page {
+    max-width: 600px;
+    margin: 30px auto;  /* 水平居中，上下留白 */
+    padding: 30px;
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+.form-page .form-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: var(--primary-color);
+}
+/* 表单组（限定作用域：仅在 .form-page 内生效） */
+.form-page .form-group {
+    margin-bottom: 20px;
+}
+.form-page label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+/* 表单输入控件样式 */
+.form-page input[type="text"],
+.form-page input[type="password"],
+.form-page input[type="email"],
+.form-page input[type="date"],
+.form-page input[type="number"],
+.form-page select,
+.form-page textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: var(--transition);
+}
+/* 输入控件聚焦效果 */
+.form-page input:focus,
+.form-page select:focus,
+.form-page textarea:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);  /* 蓝色光晕 */
+}
+.form-page input[type="radio"],
+.form-page input[type="checkbox"] {
+    margin-right: 8px;
+}
+/* 单选框/复选框组布局 */
+.form-page .radio-group,
+.form-page .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;  /* 选项间距 */
+}
+/* 表单按钮 */
+.form-page button {
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-right: 10px;
+}
+/* 重置按钮特殊样式 */
+.form-page button[type="reset"] {
+    background-color: var(--light-text);
+}
+.form-page button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+.form-page button[type="reset"]:hover {
+    background-color: #555;  /* 加深灰色 */
+}
+
+/* ========================== 登录模态框样式 ========================== */
+.login-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);  /* 遮罩背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+/* 登录模态框激活状态 */
+.login-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+.login-form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateY(20px);  /* 默认下移 */
+    transition: transform 0.3s ease;
+}
+.login-modal.active .login-form {
+    transform: translateY(0);  /* 激活时上移到居中位置 */
+}
+/* 关闭登录模态框按钮 */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    transition: var(--transition);
+}
+.close-modal:hover {
+    color: var(--accent-color);
+}
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+    font-size: 22px;
+}
+/* 登录表单组（限定作用域） */
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+.login-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+.login-form .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: var(--transition);
+}
+.login-form .form-group input:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+/* 记住我选项 */
+.remember-me {
+    margin: 15px 0 20px;
+    display: flex;
+    align-items: center;
+}
+.remember-me input {
+    margin-right: 8px;
+    width: auto;  /* 覆盖100%宽度，自适应 */
+}
+/* 登录按钮 */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));  /* 渐变背景 */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.login-btn:hover {
+    background: linear-gradient(45deg, var(--primary-color), #2980b9);  /* 渐变反转 */
+    transform: scale(1.05);  /* 放大 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+/* 注册链接 */
+.register-link {
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+}
+.register-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+.register-link a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* ========================== 图书详情弹窗样式 ========================== */
+.book-detail-popup {
+    position: absolute;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    padding: 15px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+    pointer-events: none;  /* 初始不可点击 */
+    bottom: 100%;  /* 显示在图书项上方 */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);  /* 水平居中，下移 */
+    margin-bottom: 15px;  /* 与图书项间距 */
+}
+/* 弹窗三角形箭头 */
+.book-detail-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;  /* 箭头在弹窗底部 */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;  /* 白色箭头，其他方向透明 */
+}
+/* 弹窗内容布局 */
+.book-detail-popup .popup-content {
+    display: flex;
+    gap: 15px;  /* 图片与信息间距 */
+}
+.popup-img {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+.popup-info {
+    flex: 1;  /* 占满剩余空间 */
+}
+.popup-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+.popup-author {
+    font-size: 14px;
+    color: var(--light-text);
+    margin-bottom: 8px;
+}
+.popup-description {
+    font-size: 13px;
+    color: var(--text-color);
+    line-height: 1.5;
+    max-height: 150px;  /* 描述文本最大高度 */
+    overflow-y: auto;  /* 超出滚动 */
+}
+/* 图书项 hover 时显示弹窗 */
+.book-item:hover .book-detail-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);  /* 水平居中，上移 */
+    pointer-events: auto;  /* 可点击 */
+}

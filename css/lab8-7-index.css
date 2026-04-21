@@ -1,0 +1,984 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 25px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: #3498db;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        .nav-icons {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* 搜索框样式 */
+        .search-container {
+            position: relative;
+            margin-right: 20px;
+        }
+        
+        .search-box {
+            padding: 8px 15px 8px 40px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            width: 250px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #3498db;
+            width: 300px;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .search-result-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .book-title {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .book-author {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .book-category {
+            font-size: 12px;
+            color: #3498db;
+            background-color: #e8f4fc;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+        
+        /* 购物车样式修正 */
+        .cart-icon {
+            position: relative;
+            font-size: 20px;
+            color: #555;
+            margin-right: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cart-icon:hover {
+            color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #e74c3c;
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 主体布局 */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            flex: 0 0 250px;
+        }
+        
+        .content {
+            flex: 1;
+        }
+        
+        .right-sidebar {
+            flex: 0 0 280px;
+        }
+        
+        /* 分类列表样式 */
+        .category-list {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .category-list h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-list ul {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 8px;
+        }
+        
+        .category-list a {
+            text-decoration: none;
+            color: #555;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-list a:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+            transform: translateX(5px);
+        }
+        
+        .category-list i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* 3D图书展示 */
+        .book-showcase {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .book-showcase h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .book-carousel {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .carousel-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate 20s infinite linear;
+        }
+        
+        .carousel-container:hover {
+            animation-play-state: paused;
+        }
+        
+        .book-3d {
+            position: absolute;
+            width: 120px;
+            height: 160px;
+            top: 50%;
+            left: 50%;
+            margin-left: -60px;
+            margin-top: -80px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .book-3d:nth-child(1) { transform: rotateY(0deg) translateZ(250px); }
+        .book-3d:nth-child(2) { transform: rotateY(60deg) translateZ(250px); }
+        .book-3d:nth-child(3) { transform: rotateY(120deg) translateZ(250px); }
+        .book-3d:nth-child(4) { transform: rotateY(180deg) translateZ(250px); }
+        .book-3d:nth-child(5) { transform: rotateY(240deg) translateZ(250px); }
+        .book-3d:nth-child(6) { transform: rotateY(300deg) translateZ(250px); }
+        
+        .book-3d:hover {
+            transform: rotateY(var(--ry)) translateZ(250px) scale(1.2);
+        }
+        
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            background-color: #3498db;
+            border-radius: 4px 8px 8px 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            backface-visibility: hidden;
+        }
+        
+        .book-cover:nth-child(1) { background: linear-gradient(135deg, #3498db, #2ecc71); }
+        .book-cover:nth-child(2) { background: linear-gradient(135deg, #9b59b6, #e74c3c); }
+        .book-cover:nth-child(3) { background: linear-gradient(135deg, #1abc9c, #3498db); }
+        .book-cover:nth-child(4) { background: linear-gradient(135deg, #e74c3c, #f39c12); }
+        .book-cover:nth-child(5) { background: linear-gradient(135deg, #2ecc71, #9b59b6); }
+        .book-cover:nth-child(6) { background: linear-gradient(135deg, #f39c12, #e74c3c); }
+        
+        @keyframes rotate {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        /* 热门推荐 */
+        .hot-books {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .hot-books h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .book-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 350px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        
+        .book-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .book-card:hover .book-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .book-card-front, .book-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-card-front {
+            background-color: #fff;
+        }
+        
+        .book-card-back {
+            background-color: #f8f9fa;
+            transform: rotateY(180deg);
+            padding: 20px;
+            justify-content: space-between;
+        }
+        
+        .book-image {
+            height: 200px;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .book-info {
+            padding: 15px;
+            flex-grow: 1;
+        }
+        
+        .book-info h3 {
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .book-author {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .book-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .book-description {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .book-rating {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* 新书上市 */
+        .new-books {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .new-books h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .book-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .book-table th, .book-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .book-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .book-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .table-add-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .table-add-btn:hover {
+            background-color: #27ae60;
+            transform: translateY(-2px);
+        }
+        
+        /* 右侧边栏 */
+        .promo-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+        
+        .promo-card h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .promo-image {
+            height: 150px;
+            background-color: #3498db;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #3498db;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #34495e;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: #3498db;
+            transform: translateY(-5px) rotate(360deg);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            margin-top: 20px;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalAppear 0.3s ease-out;
+        }
+        
+        @keyframes modalAppear {
+            0% { opacity: 0; transform: translateY(-50px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .modal-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            color: #2c3e50;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        /* 密码强度指示器 - 增强版 */
+        .password-strength {
+            margin-top: 5px;
+            height: 5px;
+            background-color: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .strength-bar {
+            height: 100%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+        
+        .strength-bar.weak {
+            background-color: #e74c3c;
+            width: 33.33%;
+        }
+        
+        .strength-bar.medium {
+            background-color: #f39c12;
+            width: 66.66%;
+        }
+        
+        .strength-bar.strong {
+            background-color: #2ecc71;
+            width: 100%;
+        }
+        
+        .strength-text {
+            font-size: 12px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .strength-indicators {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .strength-indicator {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            background-color: #eee;
+            color: #7f8c8d;
+        }
+        
+        .strength-indicator.valid {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        /* 表单验证样式 */
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .valid {
+            border-color: #2ecc71 !important;
+        }
+        
+        .invalid {
+            border-color: #e74c3c !important;
+        }
+        
+        /* 购物车模态框 */
+        .cart-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        
+        .cart-item-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-right: none;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px 0;
+            border-top: 2px solid #eee;
+        }
+        
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .btn-success {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #7f8c8d;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar, .right-sidebar {
+                flex: none;
+                width: 100%;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .search-box:focus {
+                width: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+            }
+            
+            .nav-menu li {
+                margin: 5px 10px 5px 0;
+            }
+            
+            .nav-icons {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-container {
+                margin-right: 0;
+                flex-grow: 1;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .search-box:focus {
+                width: 100%;
+            }
+            
+            .book-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .book-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* 验证成功提示 */
+        .success-message {
+            color: #2ecc71;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* 购物车图片修正 */
+        .cart-icon i {
+            font-size: 22px;
+        }

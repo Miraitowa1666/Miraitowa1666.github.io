@@ -1,0 +1,847 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 头部导航栏 - 满足过渡效果要求 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 25px;
+        }
+        
+        /* 导航菜单项过渡效果 - 第1个元素 */
+        .nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 5px;
+            -webkit-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-transition-property: color, background-color, transform, box-shadow;
+            transition-property: color, background-color, transform, box-shadow;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
+            -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        
+        .nav a i {
+            margin-right: 8px;
+        }
+        
+        /* 购物车图标过渡效果 - 第2个元素 */
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            color: #555;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            -webkit-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-transition-property: color, transform, background-color;
+            transition-property: color, transform, background-color;
+            -webkit-transition-duration: 0.4s;
+            transition-duration: 0.4s;
+            -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .container {
+            display: flex;
+            padding: 30px;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .left-col {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .left-col h3 {
+            margin-bottom: 20px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .left-col h3 i {
+            margin-right: 10px;
+        }
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            margin-bottom: 12px;
+        }
+        
+        /* 分类列表过渡效果 - 第3个元素 */
+        .category-list a {
+            text-decoration: none;
+            color: #555;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 8px;
+            -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-transition-property: background-color, color, transform;
+            transition-property: background-color, color, transform;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .category-list a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .middle-col {
+            flex: 3;
+        }
+        
+        .hot-recommend, .new-books {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hot-recommend h3, .new-books h3 {
+            margin-bottom: 20px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hot-recommend h3 i, .new-books h3 i {
+            margin-right: 10px;
+        }
+        
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        /* 3D翻转图书卡片 - 满足3D转换要求 */
+        .book-item {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            cursor: pointer;
+            height: 380px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-perspective: 1000px;
+            perspective: 1000px;
+        }
+        
+        .book-item-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-transition-property: transform;
+            transition-property: transform;
+            -webkit-transition-duration: 0.8s;
+            transition-duration: 0.8s;
+            -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .book-item:hover .book-item-inner {
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        
+        .book-item-front, .book-item-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .book-item-front {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .book-item-back {
+            background: linear-gradient(135deg, #6a89cc 0%, #4a69bd 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            -webkit-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+        
+        .book-item-back h4 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .book-item-back .book-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f1c40f;
+            margin-bottom: 10px;
+        }
+        
+        .book-item-back .book-rating {
+            color: #f1c40f;
+            margin-bottom: 15px;
+        }
+        
+        .book-item-back .book-description {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+        
+        .book-item-back .quick-add-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            align-self: center;
+        }
+        
+        .book-item-front .book-image-container {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .book-item-front img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            -o-object-fit: contain;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+        
+        .book-item p {
+            padding: 15px 15px 5px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .book-item span {
+            padding: 0 15px 10px;
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* 按钮过渡效果 - 第4个元素 */
+        .book-item .add-to-cart {
+            margin: 0 15px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            -webkit-transition-property: background-color, transform, box-shadow;
+            transition-property: background-color, transform, box-shadow;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-timing-function: ease;
+            transition-timing-function: ease;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        
+        .new-books table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .new-books th {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .new-books th i {
+            margin-right: 8px;
+        }
+        
+        .new-books td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .new-books tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .right-col {
+            flex: 1;
+        }
+        
+        .promo-item {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .promo-item img {
+            width: 100%;
+            height: 120px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+        
+        .promo-item p {
+            padding: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        /* 3D环形图书展示 - 满足3D转换要求 */
+        .ring-carousel {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            -webkit-perspective: 800px;
+            perspective: 800px;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            overflow: hidden;
+        }
+        
+        .ring-carousel h3 {
+            margin-bottom: 25px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ring-carousel h3 i {
+            margin-right: 10px;
+        }
+        
+        .ring-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-animation: rotateRing 20s infinite linear;
+            animation: rotateRing 20s infinite linear;
+        }
+        
+        .ring-container:hover {
+            -webkit-animation-play-state: paused;
+            animation-play-state: paused;
+        }
+        
+        @-webkit-keyframes rotateRing {
+            0% {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+            }
+            100% {
+                -webkit-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+            }
+        }
+        
+        @keyframes rotateRing {
+            0% {
+                -webkit-transform: rotateY(0deg);
+                transform: rotateY(0deg);
+            }
+            100% {
+                -webkit-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+            }
+        }
+        
+        .ring-book {
+            position: absolute;
+            width: 150px;
+            height: 200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: transform 0.5s ease;
+            transition: transform 0.5s ease;
+        }
+        
+        .ring-book:hover {
+            -webkit-transform: translateZ(30px) rotateX(5deg) scale(1.1);
+            transform: translateZ(30px) rotateX(5deg) scale(1.1);
+        }
+        
+        .ring-book .book-image-container {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .ring-book img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            -o-object-fit: contain;
+            object-fit: contain;
+        }
+        
+        .ring-book-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .ring-book-price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        /* 环形布局计算 - 使用多种3D变换方法 */
+        .ring-book:nth-child(1) { -webkit-transform: rotateY(0deg) translateZ(250px) rotateX(0deg); transform: rotateY(0deg) translateZ(250px) rotateX(0deg); }
+        .ring-book:nth-child(2) { -webkit-transform: rotateY(60deg) translateZ(250px) rotateX(0deg); transform: rotateY(60deg) translateZ(250px) rotateX(0deg); }
+        .ring-book:nth-child(3) { -webkit-transform: rotateY(120deg) translateZ(250px) rotateX(0deg); transform: rotateY(120deg) translateZ(250px) rotateX(0deg); }
+        .ring-book:nth-child(4) { -webkit-transform: rotateY(180deg) translateZ(250px) rotateX(0deg); transform: rotateY(180deg) translateZ(250px) rotateX(0deg); }
+        .ring-book:nth-child(5) { -webkit-transform: rotateY(240deg) translateZ(250px) rotateX(0deg); transform: rotateY(240deg) translateZ(250px) rotateX(0deg); }
+        .ring-book:nth-child(6) { -webkit-transform: rotateY(300deg) translateZ(250px) rotateX(0deg); transform: rotateY(300deg) translateZ(250px) rotateX(0deg); }
+        
+        /* 3D过渡动画增强 */
+        .nav a:hover {
+            background-color: #3498db;
+            color: white;
+            -webkit-transform: translateY(-3px) translateZ(10px) rotateX(2deg);
+            transform: translateY(-3px) translateZ(10px) rotateX(2deg);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 152, 219, 0.1);
+            -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transform-origin: right;
+            transform-origin: right;
+            -webkit-transition: transform 0.4s ease;
+            transition: transform 0.4s ease;
+            border-radius: 5px;
+        }
+        
+        .nav a:hover::before {
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+            -webkit-transform-origin: left;
+            transform-origin: left;
+        }
+        
+        .add-to-cart:hover, .checkout-btn:hover, .login-btn:hover {
+            -webkit-transform: translateY(-3px) translateZ(5px) rotateX(2deg);
+            transform: translateY(-3px) translateZ(5px) rotateX(2deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .add-to-cart:active, .checkout-btn:active, .login-btn:active {
+            -webkit-transform: translateY(0) translateZ(0) rotateX(0deg);
+            transform: translateY(0) translateZ(0) rotateX(0deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-icon:hover {
+            color: #e74c3c;
+            -webkit-transform: translateY(-5px) rotateY(15deg) scale(1.1);
+            transform: translateY(-5px) rotateY(15deg) scale(1.1);
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        
+        .category-list a:hover {
+            background-color: #3498db;
+            color: white;
+            -webkit-transform: translateX(10px) rotateY(5deg);
+            transform: translateX(10px) rotateY(5deg);
+        }
+        
+        /* 登录表单元素过渡效果 */
+        .form-group input {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+            -webkit-transition-property: border-color, box-shadow, transform;
+            transition-property: border-color, box-shadow, transform;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-timing-function: ease;
+            transition-timing-function: ease;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        
+        .form-group input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            -webkit-transform: translateZ(5px) rotateX(1deg);
+            transform: translateZ(5px) rotateX(1deg);
+        }
+        
+        /* 3D页脚元素 */
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #3498db;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #3498db;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        /* 社交媒体图标3D旋转效果 */
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-transition-property: transform, background-color;
+            transition-property: transform, background-color;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
+            -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .social-icon:hover {
+            -webkit-transform: translateY(-5px) rotateY(360deg) rotateX(10deg) scale(1.1);
+            transform: translateY(-5px) rotateY(360deg) rotateX(10deg) scale(1.1);
+            background-color: #3498db;
+        }
+        
+        .social-icon:nth-child(1):hover { background-color: #1877f2; }
+        .social-icon:nth-child(2):hover { background-color: #1da1f2; }
+        .social-icon:nth-child(3):hover { background-color: #c32aa3; }
+        .social-icon:nth-child(4):hover { background-color: #ff0000; }
+        
+        /* 版权信息淡入过渡动画 */
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            -webkit-animation: fadeIn 2s ease forwards 1s;
+            animation: fadeIn 2s ease forwards 1s;
+            -webkit-animation-property: opacity, transform;
+            animation-property: opacity, transform;
+            -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+            -webkit-animation-timing-function: ease;
+            animation-timing-function: ease;
+        }
+        
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+                -webkit-transform: translateY(20px);
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                -webkit-transform: translateY(20px);
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+        
+        /* 模态框样式 */
+        .cart-modal, .login-modal, .register-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-modal.active, .login-modal.active, .register-modal.active {
+            display: flex;
+        }
+        
+        .login-form, .cart-header {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            -webkit-transform: perspective(1000px) rotateX(0deg);
+            transform: perspective(1000px) rotateX(0deg);
+            -webkit-transition: transform 0.5s ease;
+            transition: transform 0.5s ease;
+        }
+        
+        .login-modal.active .login-form, .register-modal.active .login-form {
+            -webkit-animation: modalAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: modalAppear 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        
+        @-webkit-keyframes modalAppear {
+            0% {
+                opacity: 0;
+                -webkit-transform: perspective(1000px) rotateX(-90deg) translateY(100px);
+                transform: perspective(1000px) rotateX(-90deg) translateY(100px);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: perspective(1000px) rotateX(0deg) translateY(0);
+                transform: perspective(1000px) rotateX(0deg) translateY(0);
+            }
+        }
+        
+        @keyframes modalAppear {
+            0% {
+                opacity: 0;
+                -webkit-transform: perspective(1000px) rotateX(-90deg) translateY(100px);
+                transform: perspective(1000px) rotateX(-90deg) translateY(100px);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: perspective(1000px) rotateX(0deg) translateY(0);
+                transform: perspective(1000px) rotateX(0deg) translateY(0);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-col, .right-col {
+                flex: none;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin: 20px 0;
+            }
+            
+            .book-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .ring-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .ring-book {
+                width: 120px;
+                height: 160px;
+            }
+            
+            .ring-book img {
+                width: 80px;
+                height: 100px;
+            }
+        }
